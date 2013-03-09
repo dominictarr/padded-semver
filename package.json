@@ -1,0 +1,21 @@
+{
+  "name": "padded-semver",
+  "description": "",
+  "version": "0.0.0",
+  "homepage": "https://github.com/dominictarr/padded-semver",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dominictarr/padded-semver.git"
+  },
+  "dependencies": {
+    "semver": "~1.1.4"
+  },
+  "devDependencies": {
+    "tape": "~0.2.2"
+  },
+  "scripts": {
+    "test": "set -e; for t in test/*.js; do node $t; done"
+  },
+  "author": "Dominic Tarr <dominic.tarr@gmail.com> (http://dominictarr.com)",
+  "license": "MIT"
+}
