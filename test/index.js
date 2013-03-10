@@ -186,9 +186,7 @@ test("range tests", function (t) {
   })
   t.end()
 })
-return 
-/*
-return
+
 test("\nnegative range tests", function (t) {
 // [range, version]
 // version should not be included by range
@@ -238,11 +236,24 @@ test("\nnegative range tests", function (t) {
   , [">=0.7.x", "0.6.2"]
   , ["<=0.7.x", "0.7.2"]
   ].forEach(function (v) {
-    t.ok(!satisfies(v[1], v[0]), v[0]+" not satisfied by "+v[1])
+
+    var v1 = semver.pad(v[1])
+    var range = semver.range(v[0].slice())
+    console.log(range, v[0], v1)
+    t.ok(
+
+    !( 
+      (!range.start || range.start <= v1)
+      && 
+      (!range.end || range.end >= v1)
+    )
+        , v1 + ' comes after ' + range.start)
+
+//    t.ok(!satisfies(v[1], v[0]), v[0]+" not satisfied by "+v[1])
   })
   t.end()
 })
-*/
+//*/
 
 test("\ncomparators test", function (t) {
 // [range, comparators]
