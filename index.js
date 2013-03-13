@@ -17,6 +17,7 @@ function unpad (val) {
 
 exports.pad = function (ver) {
   var ver = semver.parse(ver)
+  ver.shift()
   ver[3] = ver[3] ? ver[3].replace(/-/g, '') : 0
   ver = ver.map(pad)
   ver[4] = (ver[4] ? '_' + (ver[4] || '') : '~')
@@ -38,16 +39,33 @@ exports.range = function (r) {
   var range = semver.toComparators(r).shift()
   var obj = {}
 
-
   var first = range.shift()
-  if('>=' == first.substring(0, 2))
+  if('>=' == first.substring(0, 2)) {
     obj.start = exports.pad(
-      first.substring(2), first = range.shift()
-    )
-
-  if(first && '<' == first.substring(1))
-    obj.end = exports.pad(
       first.substring(2)
+    ) 
+    first = range.shift()
+  }
+  else if('>' == first[0]) {
+    obj.start = exports.pad(
+      first.substring(1)
+    )
+    first = range.shift()
+  }
+  else if (/^\d/.test(first)) { //exact!
+    return {
+      start: exports.pad(first), end: exports.pad(first)
+    }
+
+  }
+
+  if(first && '<=' == first.substring(0, 2))
+    obj.end = exports.pad(
+      first.substring(1)
+    )
+  else if(first && '<' == first[0])
+    obj.end = exports.pad(
+      first.substring(1)
     )
 
   return obj
