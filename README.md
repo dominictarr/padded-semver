@@ -10,7 +10,7 @@ in the same order as isaacs/semver compares versions.
 
 ## Stability
 
-Experimental: Expect the unexpected. Please provide feedback on api and your use-case.
+Unstable: Expect patches and features, possible api changes.
 
 ## Example
 
