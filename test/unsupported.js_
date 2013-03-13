@@ -1,0 +1,36 @@
+var test = require("tape")
+  , semver = require("../")
+
+
+// SPLIT RANGES ARE NOT SUPPORTED.
+// BUT IF THEY WHERE,
+// THIS IS WHAT THE TEST WOULD LOOK LIKE.
+
+test("range tests", function (t) {
+; [ ["0.1.20 || 1.2.4", "1.2.4"]
+  , [">=0.2.3 || <0.0.1", "0.0.0"]
+  , [">=0.2.3 || <0.0.1", "0.2.3"]
+  , [">=0.2.3 || <0.0.1", "0.2.4"]
+  , ["||", "1.3.4"]
+  , ["1.2.x || 2.x", "2.1.3"]
+  , ["1.2.x || 2.x", "1.2.3"]
+  , ["1.2.* || 2.*", "2.1.3"]
+  , ["1.2.* || 2.*", "1.2.3"]
+  , ["~1.2.1 >=1.2.3", "1.2.3"]
+  , ["~1.2.1 =1.2.3", "1.2.3"]
+  , ['~1.2.1 >=1.2.3 1.2.3', '1.2.3']
+  ].forEach(function (v) {
+    var v1 = semver.pad(v[1])
+    var range = semver.range(v[0])
+    console.log(range, v[0])
+    if(range.start)
+      t.ok(range.start <= v1
+        , v1 + ' comes after ' + range.start)
+    if(range.end)
+      t.ok(range.end >= v1
+        , v1 + ' comes before ' + range.end)
+  })
+  t.end()
+})
+
+
