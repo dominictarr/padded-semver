@@ -3,6 +3,11 @@
 Convert semver to strings that sort lexiographically,
 in the same order as isaacs/semver compares versions.
 
+> note, if you want to use ALL the 'node-semver' features,
+> this module has missing features, and bugs.
+> but if you use 1.3.4, ~0.1.3 or 2.3.x ranges like a reasonable
+> person it will be fine.
+
 ## Stability
 
 Experimental: Expect the unexpected. Please provide feedback on api and your use-case.
