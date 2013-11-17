@@ -1,3 +1,4 @@
+
 var semver = require('semver')
 var zeros = '0000'
 
@@ -60,11 +61,9 @@ exports.unpad = function (ver) {
 }
 
 function fixrange (r) {
-//  if([0-9]+)\.([0-9]+)\.([0-9]+)-
   var m = /(?:[0-9])([A-Za-z]+\b)/.exec(r)
   if(!m) return r
   r = r.replace(/[A-Za-z]+\b/, '-'+m[1]).replace(/-+/, '-')
-  console.log('fixed', r)
   return r
 }
 
