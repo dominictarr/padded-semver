@@ -96,6 +96,8 @@ test("range tests", function (t) {
   , ['^1.2 ^1', '1.4.2']
   , ['^1.2', '1.2.0-pre']
   , ['^1.2.3', '1.2.3-pre']
+  , ['~2.2.0rc', '2.2.0']
+  , ['1.0.2-1.2.3', '1.0.2-1.2.3']
   ].forEach(function (v) {
 //    t.ok(satisfies(v[1], v[0]), v[0]+" satisfied by "+v[1])
     var v1 = semver.pad(v[1])
