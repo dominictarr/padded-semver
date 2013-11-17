@@ -1,7 +1,7 @@
 {
   "name": "padded-semver",
   "description": "pad semver to make it lexiographically sortable",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "homepage": "https://github.com/dominictarr/padded-semver",
   "repository": {
     "type": "git",
