@@ -88,11 +88,19 @@ test("range tests", function (t) {
   , ['1.2.3 >=1.2.1', '1.2.3']
   , ['>=1.2.3 >=1.2.1', '1.2.3']
   , ['>=1.2.1 >=1.2.3', '1.2.3']
+  , ['^1.2.3', '1.8.1']
+  , ['^1.2.3', '1.2.3-beta']
+  , ['^0.1.2', '0.1.2']
+  , ['^0.1', '0.1.2']
+  , ['^1.2', '1.4.2']
+  , ['^1.2 ^1', '1.4.2']
+  , ['^1.2', '1.2.0-pre']
+  , ['^1.2.3', '1.2.3-pre']
   ].forEach(function (v) {
 //    t.ok(satisfies(v[1], v[0]), v[0]+" satisfied by "+v[1])
     var v1 = semver.pad(v[1])
     var range = semver.range(v[0])
-    console.log(range, v[0])
+    console.log(range, v[0], v[1])
     if(range.start)
       t.ok(range.start <= v1
         , v1 + ' comes after ' + range.start)
