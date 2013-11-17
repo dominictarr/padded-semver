@@ -24,11 +24,14 @@ p.pad('1.2.4-5-build')
 => '0001!0002!0003!0004!_build'
 ```
 
-## TODO
+## SemVer@2
 
-* range - generate a range `{start:s, end:e}` pair
-  that can be used to retrive all semvers that fit a range.
+This now supports semver2, including the ^ "compatible" range.
+the compatible range is pretty silly.
+I wish it was what everyone thought ~ did.
+Instead it's another silly thing.
 
+SemVer is too complicated.
 
 ## License
 
