@@ -2,9 +2,11 @@ var semver = require('semver')
 var zeros = '0000'
 
 function fixbuild (ver) {
-  var m = /[^0-9]+$/.exec(ver)
-  if(!m) return ver
-  return ver.replace(/[^0-9]+$/, '-' + m[0].replace(/^\+$/, 'plus'))
+  ver = ver.replace(/^v/, '')
+  var m = /(?:\.[0-9]+|)([^0-9x]+)$/.exec(ver)
+  if(!m || !m[1]) return ver
+  ver = ver.replace(/[^0-9]+$/, '-' + m[1].replace(/^\+$/, 'plus'))
+  return ver
 }
 
 function pad (val) {
@@ -27,6 +29,7 @@ exports.pad = function (_ver) {
       return !isNaN(e) ? parseInt(e) : e 
     })
   }
+
   if('number' == typeof ver.prerelease[0])
     ver.build.push(ver.prerelease.shift())
 
@@ -37,7 +40,7 @@ exports.pad = function (_ver) {
     pad(ver.patch),
     pad(ver.build),
     pre ? '_' + pre : '~'
-    ].join('!')
+  ].join('!')
   return ver.slice(0, 5).join('!')
   ver[3] = ver[3] ? ver[3].replace(/-/g, '') : 0
   ver = ver.map(pad)
@@ -56,8 +59,18 @@ exports.unpad = function (ver) {
   return ver
 }
 
+function fixrange (r) {
+//  if([0-9]+)\.([0-9]+)\.([0-9]+)-
+  var m = /(?:[0-9])([A-Za-z]+\b)/.exec(r)
+  if(!m) return r
+  r = r.replace(/[A-Za-z]+\b/, '-'+m[1]).replace(/-+/, '-')
+  console.log('fixed', r)
+  return r
+}
+
 exports.range = function (r) {
-  var range = semver.toComparators(r).shift()
+
+ var range = semver.toComparators(fixrange(r)).shift()
 
   var obj = {}
 
