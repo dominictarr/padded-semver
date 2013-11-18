@@ -24,7 +24,7 @@ function unpad (val) {
 }
 
 exports.pad = function (_ver) {
-  var ver = semver.parse(fixbuild(_ver))
+  var ver = semver.parse(fixbuild(_ver), true)
   if(/^[0-9]+/.test(ver.prerelease[0]) && 'string' === typeof ver.prerelease[0]) {
     ver.prerelease = ver.prerelease[0].split(/-+/).map(function (e) {
       return !isNaN(e) ? parseInt(e) : e 
