@@ -69,7 +69,7 @@ function fixrange (r) {
 
 exports.range = function (r) {
 
- var range = semver.toComparators(fixrange(r)).shift()
+ var range = semver.toComparators(fixrange(r), true).shift()
 
   var obj = {}
 
